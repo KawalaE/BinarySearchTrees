@@ -50,8 +50,22 @@ class BST{
             }
         }
     }
+    find(val){
+        let queue = [];
+        queue.push(this.root);
+
+        while(queue.length){
+            let result = queue.pop();
+            if(val === result.value) return true;
+            if(result.left) queue.unshift(result.left);
+            if(result.right) queue.unshift(result.right);
+        }
+        return false;
+    }
 }
 
 let myTree = new BST([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 console.log(myTree.insert(1120));
+console.log(myTree.find(67));
+console.log(myTree.find(1));
 
