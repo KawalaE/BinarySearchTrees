@@ -25,7 +25,33 @@ class BST{
         }
         return balancedBST(0, sortedArr.length-1);
     }
+    insert(val){
+        let temp = this.root;
+
+        while(true){
+            if(val < temp.value){
+                if(temp.left){
+                    temp = temp.left;
+                } else {
+                    temp.left = new Node(val);
+                    return this.root;
+                }
+            }
+            if(val > temp.value){
+                if(temp.right){
+                    temp = temp.right;
+                }else {
+                    temp.right = new Node(val);
+                    return this.root;
+                }
+            }
+            if(val === temp.value){
+                return false;
+            }
+        }
+    }
 }
 
 let myTree = new BST([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-console.log(myTree);
+console.log(myTree.insert(1120));
+
