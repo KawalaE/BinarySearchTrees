@@ -62,10 +62,62 @@ class BST{
         }
         return false;
     }
+    
+    levelOrder(){
+        let result = [];
+        let queue = [];
+        queue.push(this.root);
+
+        while(queue.length){
+            let temp = queue.pop();
+            result.push(temp.value);
+            if(temp.left) queue.unshift(temp.left);
+            if(temp.right) queue.unshift(temp.right);
+        }
+        return result;
+    }
+    DFSInOrder(){
+        let result = [];
+    
+        function traverse(node){
+            if(node.left) traverse(node.left);
+            result.push(node.value);
+            if(node.right) traverse(node.right);
+        }
+        traverse(this.root);
+        return result;
+    }
+    DFSPostOrder(){
+        let result = [];
+    
+        function traverse(node){
+            if(node.left) traverse(node.left);
+            if(node.right) traverse(node.right);
+            result.push(node.value);
+        }
+        traverse(this.root);
+        return result;
+    }
+    DFSPreOrder(){
+        let result = [];
+    
+        function traverse(node){
+            result.push(node.value);
+            if(node.left) traverse(node.left);
+            if(node.right) traverse(node.right);
+        }
+        traverse(this.root);
+        return result;
+    }
+
 }
 
 let myTree = new BST([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 console.log(myTree.insert(1120));
 console.log(myTree.find(67));
 console.log(myTree.find(1));
+console.log(myTree.levelOrder());
+console.log(myTree.DFSInOrder());
+console.log(myTree.DFSPostOrder());
+console.log(myTree.DFSPreOrder());
 
