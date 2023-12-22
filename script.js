@@ -25,6 +25,18 @@ class BST{
         }
         return balancedBST(0, sortedArr.length-1);
     }
+    prettyPrint(node, prefix = "", isLeft = true){
+        if (!node) {
+          return;
+        }
+        if (node.right) {
+          this.prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+        }
+        console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
+        if (node.left) {
+          this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+        }
+    };
     insert(val){
         let temp = this.root;
 
@@ -109,15 +121,35 @@ class BST{
         traverse(this.root);
         return result;
     }
+    height(node){
+        let result = [];
+        let queue = [];
+        queue.push(node);
 
+        while(queue.length){
+            let vals = [];
+            let length = queue.length;
+
+            for(let i = 0; i < length; i++){
+                let temp = queue.pop();
+                vals.push(temp.value);
+                if(temp.left) queue.unshift(temp.left);
+                if(temp.right) queue.unshift(temp.right);
+            }
+            result.push(vals);
+        }
+        return result.length;
+    }
 }
 
 let myTree = new BST([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 console.log(myTree.insert(1120));
 console.log(myTree.find(67));
 console.log(myTree.find(1));
+console.log(myTree.prettyPrint(myTree.root));
 console.log(myTree.levelOrder());
 console.log(myTree.DFSInOrder());
 console.log(myTree.DFSPostOrder());
 console.log(myTree.DFSPreOrder());
-
+console.log(myTree.height(myTree.root));
+//delete, depth, isBalanced, rebalance, 
