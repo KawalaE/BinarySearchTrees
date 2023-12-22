@@ -68,7 +68,7 @@ class BST{
 
         while(queue.length){
             let result = queue.pop();
-            if(val === result.value) return true;
+            if(val === result.value) return result;
             if(result.left) queue.unshift(result.left);
             if(result.right) queue.unshift(result.right);
         }
@@ -140,6 +140,22 @@ class BST{
         }
         return result.length;
     }
+    depth(node){
+        let depth = 0;
+        function traverse(treeNode){
+            if(treeNode.value === node.value){
+                return depth;
+            }
+            if(node.value > treeNode.value) {
+                depth++;
+                return traverse(treeNode.right);
+            } else if(node.value < treeNode.value){
+                depth++;
+                return traverse(treeNode.left);
+            }
+        }
+        return traverse(this.root);
+    }
 }
 
 let myTree = new BST([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -152,4 +168,5 @@ console.log(myTree.DFSInOrder());
 console.log(myTree.DFSPostOrder());
 console.log(myTree.DFSPreOrder());
 console.log(myTree.height(myTree.root));
+console.log(myTree.depth(myTree.find(4)));
 //delete, depth, isBalanced, rebalance, 
