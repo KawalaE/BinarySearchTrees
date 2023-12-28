@@ -187,6 +187,12 @@ class BST{
         let result = Math.abs(this.height(this.root.left) - this.height(this.root.right));
         return result > 1 ? false : true;
     }
+    rebalance(){
+        if(this.isBalanced()) return this.root;
+        let newTree = this.DFSInOrder();
+        this.root = this.buildTree(newTree);
+        return this.root;
+    }
     
 }
 
@@ -199,10 +205,18 @@ console.log(myTree.levelOrder());
 console.log(myTree.DFSInOrder());
 console.log(myTree.DFSPostOrder());
 console.log(myTree.DFSPreOrder());
+console.log(myTree.isBalanced());
 console.log(myTree.height(myTree.root));
 console.log(myTree.depth(myTree.find(4)));
 console.log(myTree.isBalanced());
 console.log(myTree.minNode(myTree.root));
 console.log(myTree.deleteNode(myTree.root, 9));
 myTree.prettyPrint(myTree.root);
-//delete, 
+console.log(myTree.insert(1120));
+console.log(myTree.insert(2120));
+console.log(myTree.insert(3120));
+console.log(myTree.insert(4120));
+myTree.prettyPrint(myTree.root);
+console.log(myTree.isBalanced());
+console.log(myTree.rebalance());
+myTree.prettyPrint(myTree.root);
