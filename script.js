@@ -36,7 +36,7 @@ class BST{
         if (node.left) {
           this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
         }
-    };
+    }
     insert(val){
         let temp = this.root;
 
@@ -156,6 +156,10 @@ class BST{
         }
         return traverse(this.root);
     }
+    isBalanced(){
+        let result = Math.abs(this.height(this.root.left) - this.height(this.root.right));
+        return result > 1 ? false : true;
+    }
 }
 
 let myTree = new BST([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -169,4 +173,5 @@ console.log(myTree.DFSPostOrder());
 console.log(myTree.DFSPreOrder());
 console.log(myTree.height(myTree.root));
 console.log(myTree.depth(myTree.find(4)));
-//delete, depth, isBalanced, rebalance, 
+console.log(myTree.isBalanced());
+//delete, isBalanced, rebalance, 
